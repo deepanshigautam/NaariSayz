@@ -61,9 +61,7 @@ function AdditionalFeatures() {
             <div className="relative backdrop-blur-sm bg-black/50 rounded-3xl p-8 border border-white/10">
               <div className="text-center mb-8">
                 <Users className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-semibold text-white">
-                  Support Network
-                </h3>
+                
                 <p className="text-gray-300 mt-2">
                   Join our community of support and empowerment
                 </p>

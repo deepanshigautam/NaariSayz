@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { AlertCircle, Lock, Send, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import BackgroundCanvas from "@/src/components/backgroundElement";
 
 
 const ReportPage = () => {
@@ -22,19 +23,7 @@ const ReportPage = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(-60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-        </div>
-
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-64 h-64 border border-purple-500/10 rounded-full animate-[spin_20s_linear_infinite]" />
-          <div className="absolute bottom-20 right-20 w-96 h-96 border border-pink-500/10 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
-        </div>
-
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_70%,rgba(0,0,0,0.95)_100%)]" />
-      </div>
+      <BackgroundCanvas/>
 
       <div className="container mx-auto px-4 py-8 relative">
         <div className="max-w-3xl mx-auto">

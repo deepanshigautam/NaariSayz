@@ -18,6 +18,7 @@ import {
   Baby,
   UserRound,
 } from "lucide-react";
+import BackgroundCanvas from "@/src/components/backgroundElement";
 
 const EmergencyHelpPage = () => {
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
@@ -125,22 +126,7 @@ const EmergencyHelpPage = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(-60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-        </div>
-
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[800px] h-[800px] opacity-20">
-            <div className="absolute w-full h-full rounded-full border-2 border-red-500/20 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
-            <div className="absolute w-full h-full rounded-full border-2 border-red-500/20 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite_1s]" />
-            <div className="absolute w-full h-full rounded-full border-2 border-red-500/20 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite_2s]" />
-          </div>
-        </div>
-
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_70%,rgba(0,0,0,0.95)_100%)]" />
-      </div>
+      <BackgroundCanvas/>
 
       <div className="container mx-auto px-4 py-12 relative">
         <div className="max-w-7xl mx-auto">

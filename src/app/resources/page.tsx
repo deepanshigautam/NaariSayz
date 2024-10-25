@@ -15,6 +15,7 @@ import {
   Tags
 } from "lucide-react";
 import Link from "next/link";
+import BackgroundCanvas from "@/src/components/backgroundElement";
 
 const SafetyResourcesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -108,13 +109,7 @@ const SafetyResourcesPage = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-          <div className="absolute w-full h-full bg-[repeating-linear-gradient(-60deg,#000,#000_10px,rgba(255,255,255,0.03)_10px,rgba(255,255,255,0.03)_20px)]" />
-        </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_70%,rgba(0,0,0,0.95)_100%)]" />
-      </div>
+      <BackgroundCanvas/>
 
       <div className="container mx-auto px-4 py-12 relative">
         <div className="max-w-7xl mx-auto">

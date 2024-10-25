@@ -1,6 +1,6 @@
 # NaariSayz
 
-Naari Saze is a Next.js project focused on women's safety awareness, featuring resources like helpline numbers, a report form, and informative articles. Built with TypeScript, Tailwind CSS, and Framer Motion, this application provides an engaging user experience.
+NaariSayz is a Next.js project focused on women's safety awareness, featuring resources like helpline numbers, a report form, and informative articles. Built with TypeScript, Tailwind CSS, and Framer Motion, this application provides an engaging user experience.
 
 ## Getting Started
 

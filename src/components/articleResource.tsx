@@ -277,9 +277,15 @@ const ArticleResource = () => {
     return matchesCategory && matchesSearch;
   });
 
-  
+  const getCurrentCategoryName = () => {
+    const currentCategory = categories.find(cat => cat.id === selectedCategory);
+    return currentCategory ? currentCategory.name : "";
+};
 
-
+const handleIconRender = () => {
+  const currentCategory = categories.find(cat => cat.id === selectedCategory);
+  return currentCategory ? <currentCategory.icon className="w-5 h-5" /> : null;
+};
 
   const toggleSaveArticle = (articleId: number) => {
     setSavedArticles(prev => {
@@ -336,35 +342,38 @@ const ArticleResource = () => {
         <div className="relative">
             {/* Mobile Category Dropdown */}
             <div className="md:hidden">
-                <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white flex justify-between items-center"
-                >
-                    <span>Select Category</span>
-                    <span className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                {isMobileMenuOpen && (
-                    <div className="absolute z-10 w-full mt-2 bg-gray-800 rounded-xl shadow-lg">
-                        {categories.map((category) => (
-                            <button
-                                key={category.id}
-                                onClick={() => {
-                                    setSelectedCategory(category.id);
-                                    setIsMobileMenuOpen(false);
-                                }}
-                                className={`w-full flex items-center space-x-2 px-4 py-3 transition-all ${
-                                    selectedCategory === category.id
-                                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                                        : "text-gray-300 hover:bg-white/10"
-                                }`}
-                            >
-                                <category.icon className="w-5 h-5" />
-                                <span>{category.name}</span>
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
+            <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white flex justify-between items-center"
+            >
+                <div className="flex items-center space-x-2">
+                    {handleIconRender()}
+                    <span>{getCurrentCategoryName()}</span>
+                </div>
+                <span className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-180' : ''}`}>▼</span>
+            </button>
+            {isMobileMenuOpen && (
+                <div className="absolute z-10 w-full mt-2 bg-gray-800 rounded-xl shadow-lg">
+                    {categories.map((category) => (
+                        <button
+                            key={category.id}
+                            onClick={() => {
+                                setSelectedCategory(category.id);
+                                setIsMobileMenuOpen(false);
+                            }}
+                            className={`w-full flex items-center space-x-2 px-4 py-3 transition-all ${
+                                selectedCategory === category.id
+                                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                                    : "text-gray-300 hover:bg-white/10"
+                            }`}
+                        >
+                            <category.icon className="w-5 h-5" />
+                            <span>{category.name}</span>
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
 
             {/* Desktop Category Buttons */}
             <div className="hidden md:flex gap-3 overflow-x-auto pb-2 justify-center">

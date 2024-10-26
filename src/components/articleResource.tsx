@@ -53,7 +53,8 @@ const ArticleResource = () => {
  
   const [savedArticles, setSavedArticles] = useState(new Set());
   const [showNoResults, setShowNoResults] = useState(false);
- 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 
   interface Article {
     id: number;
@@ -310,94 +311,151 @@ const ArticleResource = () => {
     }
   };
 
-  return (<div>
-     <div className="mb-12 space-y-6">
-            <div className="relative w-full max-w-xl mx-auto">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              {searchQuery && (
+  return ( <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    {/* Search Section */}
+    <div className="mb-8 space-y-6">
+        <div className="relative w-full max-w-xl mx-auto">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
-                  aria-label="Clear search"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
+                    aria-label="Clear search"
                 >
-                  <X className="w-5 h-5" />
+                    <X className="w-5 h-5" />
                 </button>
-              )}
-              <input
+            )}
+            <input
                 type="text"
                 placeholder="Search resources..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-11 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-              />
+            />
+        </div>
+
+        {/* Category Filters */}
+        <div className="relative">
+            {/* Mobile Category Dropdown */}
+            <div className="md:hidden">
+                <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white flex justify-between items-center"
+                >
+                    <span>Select Category</span>
+                    <span className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-180' : ''}`}>▼</span>
+                </button>
+                {isMobileMenuOpen && (
+                    <div className="absolute z-10 w-full mt-2 bg-gray-800 rounded-xl shadow-lg">
+                        {categories.map((category) => (
+                            <button
+                                key={category.id}
+                                onClick={() => {
+                                    setSelectedCategory(category.id);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className={`w-full flex items-center space-x-2 px-4 py-3 transition-all ${
+                                    selectedCategory === category.id
+                                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                                        : "text-gray-300 hover:bg-white/10"
+                                }`}
+                            >
+                                <category.icon className="w-5 h-5" />
+                                <span>{category.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
-              {categories.map((category) => (
-                <div key={category.id} className="relative" 
-                     onMouseEnter={() => setShowTooltip(category.id)}
-                     onMouseLeave={() => setShowTooltip("")}>
-                  <button
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                      selectedCategory === category.id
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                        : "bg-white/5 text-gray-300 hover:bg-white/10"
-                    }`}
-                    aria-label={`Filter by ${category.name}`}
-                  >
-                    <category.icon className="w-5 h-5" />
-                    <span>{category.name}</span>
-                  </button>
-                  {showTooltip === category.id && (
-                    <div className="absolute -top-8  rounded p-2 text-sm text-white">
-                      {category.name}
+            {/* Desktop Category Buttons */}
+            <div className="hidden md:flex gap-3 overflow-x-auto pb-2 justify-center">
+                {categories.map((category) => (
+                    <div
+                        key={category.id}
+                        className="relative"
+                        onMouseEnter={() => setShowTooltip(category.id)}
+                        onMouseLeave={() => setShowTooltip("")}
+                    >
+                        <button
+                            onClick={() => setSelectedCategory(category.id)}
+                            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all whitespace-nowrap ${
+                                selectedCategory === category.id
+                                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                                    : "bg-white/5 text-gray-300 hover:bg-white/10"
+                            }`}
+                            aria-label={`Filter by ${category.name}`}
+                        >
+                            <category.icon className="w-5 h-5" />
+                            <span>{category.name}</span>
+                        </button>
+                        {showTooltip === category.id && (
+                            <div className="absolute -top-8 rounded p-2 text-sm text-white ">
+                                {category.name}
+                            </div>
+                        )}
                     </div>
-                  )}
-                </div>
-              ))}
+                ))}
             </div>
-          </div>
-  
-  
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {filteredArticles.length === 0 ? (
-      <div className="col-span-3 text-center">
-        <p className="text-xl text-gray-400">No results found.</p>
-      </div>
-    ) : (
-      filteredArticles.map((article) => (
-        <div key={article.id} className="bg-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-          <img src={typeof article.image === 'string' ? article.image : article.image.src} alt={article.title} className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-xl font-bold mb-2">{article.title}</h3>
-            <p className="text-gray-300 mb-2">{article.excerpt}</p>
-            <div className="flex justify-between items-center mt-4">
-              <span className="text-gray-400">{article.readTime}</span>
-              <button
-                onClick={() => toggleSaveArticle(article.id)}
-                className={`text-gray-400 hover:text-gray-300 ${savedArticles.has(article.id) ? "text-yellow-400" : ""}`}
-                aria-label={`Save ${article.title}`}
-              >
-                <Bookmark />
-              </button>
-              <button
-                onClick={() => shareArticle(article)}
-                className="text-gray-400 hover:text-gray-300"
-                aria-label={`Share ${article.title}`}
-              >
-                <Share2 />
-              </button>
-              <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300" aria-label={`Read more about ${article.title}`}>
-                <ExternalLink />
-              </a>
-            </div>
-          </div>
         </div>
-      ))
-    )}
-  </div>
-  </div>
+    </div>
+
+    {/* Articles Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {filteredArticles.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+                <p className="text-xl text-gray-400">No results found.</p>
+            </div>
+        ) : (
+            filteredArticles.map((article) => (
+                <div
+                    key={article.id}
+                    className="bg-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col"
+                >
+                    <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
+                        <img
+                            src={typeof article.image === 'string' ? article.image : article.image.src}
+                            alt={article.title}
+                            className="absolute top-0 left-0 w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="p-4 flex-1 flex flex-col">
+                        <h3 className="text-lg sm:text-xl font-bold mb-2">{article.title}</h3>
+                        <p className="text-gray-300 text-sm sm:text-base mb-2 flex-1">{article.excerpt}</p>
+                        <div className="flex flex-wrap justify-between items-center gap-2 mt-4">
+                            <span className="text-gray-400 text-sm">{article.readTime}</span>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => toggleSaveArticle(article.id)}
+                                    className={`text-gray-400 hover:text-gray-300 ${savedArticles.has(article.id) ? "text-yellow-400" : ""}`}
+                                    aria-label={`Save ${article.title}`}
+                                >
+                                    <Bookmark className="w-5 h-5" />
+                                </button>
+                                <button
+                                    onClick={() => shareArticle(article)}
+                                    className="text-gray-400 hover:text-gray-300"
+                                    aria-label={`Share ${article.title}`}
+                                >
+                                    <Share2 className="w-5 h-5" />
+                                </button>
+                                <a
+                                    href={article.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-gray-300"
+                                    aria-label={`Read more about ${article.title}`}
+                                >
+                                    <ExternalLink className="w-5 h-5" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))
+        )}
+    </div>
+</div>
    
   );
 };

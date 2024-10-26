@@ -2,11 +2,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-    Shield,
-    Phone,
-    BookOpen,
+   
     Users,
-    Bell,
+
     Heart,
     ChevronDown,
     ChevronUp,

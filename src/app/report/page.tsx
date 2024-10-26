@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from "react";
-import { AlertCircle, Lock, Send, ArrowLeft, Loader2 } from "lucide-react";
+import { AlertCircle, Send, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/src/components/ui/alert";
 
@@ -95,7 +95,7 @@ const ReportPage: React.FC = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       setShowConfirmation(true);
-    } catch (error) {
+    } catch  {
       setShowAlert(true);
     } finally {
       setIsSubmitting(false);

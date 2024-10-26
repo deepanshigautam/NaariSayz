@@ -35,10 +35,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({ className, variant
 ));
 Alert.displayName = "Alert";
 
-// Define AlertDescription component with type for className
-interface AlertDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const AlertDescription = React.forwardRef<HTMLDivElement, AlertDescriptionProps>(({ className, ...props }, ref) => (
+// Define AlertDescription component directly using HTML attributes
+const AlertDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={`text-sm [&_p]:leading-relaxed ${className || ""}`}

@@ -15,7 +15,7 @@ import {
 
 function EmergencyNumberCard() {
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
-  const [selectedState, setSelectedState] = useState<string>("all");
+ 
 
   const emergencyContacts = [
     {

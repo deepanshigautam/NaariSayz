@@ -1,5 +1,5 @@
-
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { AlertCircle } from "lucide-react";
 import BackgroundCanvas from "@/src/components/backgroundElement";
 import EmergencyNumberCard from "@/src/components/emergencyNumberCard";
@@ -7,10 +7,15 @@ import BackButton from "@/src/components/backButton";
 import EmerAddInfo from "@/src/components/emerAddInfo";
 
 const EmergencyHelpPage = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // This will run only on the client
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background Effects */}
-      <BackgroundCanvas />
+      {isClient && <BackgroundCanvas />} {/* Only render on client */}
 
       <div className="container mx-auto px-4 py-8 relative">
         <div className="max-w-7xl mx-auto">

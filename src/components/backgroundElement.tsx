@@ -1,4 +1,4 @@
-'use client'
+"use client"; // Ensure this component runs on the client side
 
 import React, { useEffect, useRef } from 'react';
 
@@ -26,15 +26,16 @@ class BackgroundElement {
         ctx.fill();
     }
 
-    update() {
+    update(canvas: HTMLCanvasElement) {
+        // Use canvas dimensions for boundary checking
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Bounce off canvas edges
-        if (this.x + this.size > window.innerWidth || this.x - this.size < 0) {
+        // Bounce off canvas edges using the canvas dimensions
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) {
             this.speedX *= -1;
         }
-        if (this.y + this.size > window.innerHeight || this.y - this.size < 0) {
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) {
             this.speedY *= -1;
         }
     }
@@ -42,30 +43,34 @@ class BackgroundElement {
 
 const BackgroundCanvas: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const elements: BackgroundElement[] = [];
+    const elementsRef = useRef<BackgroundElement[]>([]); // Use a ref for the elements
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext('2d');
 
         if (canvas && ctx) {
-            // Create some background elements
+            // Set canvas dimensions based on the actual canvas size
+            canvas.width = canvas.clientWidth; // You can set this to a fixed value if needed
+            canvas.height = canvas.clientHeight; // Same here
+
+            // Create some background elements only once
             for (let i = 0; i < 10; i++) {
                 const element = new BackgroundElement(
-                    Math.random() * window.innerWidth,
-                    Math.random() * window.innerHeight,
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height,
                     Math.random() * 20 + 5,
                     Math.random() * 2 + 1,
                     Math.random() * 2 + 1,
                     Math.random()
                 );
-                elements.push(element);
+                elementsRef.current.push(element); // Store elements in the ref
             }
 
             const animate = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                elements.forEach((element) => {
-                    element.update();
+                elementsRef.current.forEach((element) => {
+                    element.update(canvas); // Pass the canvas to update for boundary checks
                     element.draw(ctx);
                 });
                 requestAnimationFrame(animate);
@@ -73,14 +78,12 @@ const BackgroundCanvas: React.FC = () => {
 
             animate();
         }
-    }, [canvasRef]);
+    }, []); // Run only once on mount
 
     return (
         <canvas
             ref={canvasRef}
-            width={window.innerWidth}
-            height={window.innerHeight}
-            style={{ position: 'absolute', top: 0, left: 0 }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
     );
 };

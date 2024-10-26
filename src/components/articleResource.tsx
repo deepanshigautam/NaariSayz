@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { 
     BookOpen,
     Shield,
@@ -12,6 +12,7 @@ import {
     Share2,
     ExternalLink,
   } from "lucide-react";
+  import Image from 'next/image';
 import legalright from '@/src/components/assets/legalRight.jpg';
 import img2 from '@/src/components/assets/Sexual-harassment-prevention.jpg'
 import img3 from '@/src/components/assets/childMarriage.jpg'
@@ -23,7 +24,6 @@ import img9 from '@/src/components/assets/mentalSupport.jpg'
 import img10 from '@/src/components/assets/personalSafety.avif'
 import img11 from '@/src/components/assets/workplaceharas.jpg'
 import img12 from '@/src/components/assets/sex-trafficking-lawyers-c.jpg'
-import img13 from '@/src/components/assets/safety.png'
 import img14 from '@/src/components/assets/24-7.webp'
 import img15 from '@/src/components/assets/digital-sec.jpg'
 import img16 from '@/src/components/assets/rights.jpg'
@@ -52,7 +52,7 @@ const ArticleResource = () => {
 
  
   const [savedArticles, setSavedArticles] = useState(new Set());
-  const [showNoResults, setShowNoResults] = useState(false);
+  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 
@@ -277,9 +277,7 @@ const ArticleResource = () => {
     return matchesCategory && matchesSearch;
   });
 
-  useEffect(() => {
-    setShowNoResults(searchQuery !== "" && filteredArticles.length === 0);
-  }, [searchQuery, filteredArticles.length]);
+  
 
 
 
@@ -413,11 +411,13 @@ const ArticleResource = () => {
                     className="bg-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col"
                 >
                     <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
-                        <img
-                            src={typeof article.image === 'string' ? article.image : article.image.src}
-                            alt={article.title}
-                            className="absolute top-0 left-0 w-full h-full object-cover"
-                        />
+                    <Image
+    src={typeof article.image === 'string' ? article.image : article.image.src}
+    alt={article.title}
+    layout="fill" // This is used to cover the entire parent container
+    objectFit="cover" // Similar to object-cover in regular img
+    className="absolute top-0 left-0"
+/>
                     </div>
                     <div className="p-4 flex-1 flex flex-col">
                         <h3 className="text-lg sm:text-xl font-bold mb-2">{article.title}</h3>

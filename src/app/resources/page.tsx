@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { BookOpen } from "lucide-react";
 import BackgroundCanvas from "@/src/components/backgroundElement";
 import BackButton from "@/src/components/backButton";
-import SubscribeResource from "@/src/components/subscribeResource";
 import ArticleResource from "@/src/components/articleResource";
+import Footer from "@/src/components/footer";
 
 const SafetyResourcesPage = () => {
   const [isClient, setIsClient] = useState(false);
@@ -38,11 +38,9 @@ const SafetyResourcesPage = () => {
 
           {/* Articles */}
           <ArticleResource />
-
-          {/* Subscribe Section */}
-          <SubscribeResource />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

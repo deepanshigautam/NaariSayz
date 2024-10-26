@@ -1,9 +1,11 @@
 import React from 'react'
 import LandingPage from '../components/landing'
+import Footer from '../components/footer'
 
 function page() {
   return (
-    <div><LandingPage/></div>
+    <div><LandingPage/>
+    <Footer/></div>
   )
 }
 

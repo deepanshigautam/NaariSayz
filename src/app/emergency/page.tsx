@@ -5,6 +5,7 @@ import BackgroundCanvas from "@/src/components/backgroundElement";
 import EmergencyNumberCard from "@/src/components/emergencyNumberCard";
 import BackButton from "@/src/components/backButton";
 import EmerAddInfo from "@/src/components/emerAddInfo";
+import Footer from "@/src/components/footer";
 
 const EmergencyHelpPage = () => {
   const [isClient, setIsClient] = useState(false);
@@ -45,6 +46,7 @@ const EmergencyHelpPage = () => {
           <EmerAddInfo />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

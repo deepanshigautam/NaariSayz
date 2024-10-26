@@ -6,6 +6,7 @@ import HeroSection from "./heroSection";
 import MissionSection from "./missionSection";
 import PrimaryAction from "./primaryAction";
 
+
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -21,6 +22,7 @@ const LandingPage = () => {
             <PrimaryAction />
 
             <AdditionalFeatures />
+           
           </div>
         </div>
       </div>

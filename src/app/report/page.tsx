@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { AlertCircle, Send, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/src/components/ui/alert";
+import Footer from "@/src/components/footer";
 
 // Define the type for formData
 interface FormData {
@@ -140,10 +141,12 @@ const ReportPage: React.FC = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 
   return (
+    <div>
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black" />
 
@@ -155,10 +158,10 @@ const ReportPage: React.FC = () => {
           </Link>
 
           <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="lg:text-5xl md:text-4xl text-[2rem] font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
               Report an Incident
             </h1>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 lg:text-lg md:text-lg text-[1rem]">
               Your safety matters. All reports are confidential and handled with care.
             </p>
           </div>
@@ -284,6 +287,8 @@ const ReportPage: React.FC = () => {
           )}
         </div>
       </div>
+      </div>
+      <Footer/>
     </div>
   );
 };

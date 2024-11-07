@@ -25,7 +25,7 @@ const Footer = () => {
             {/* About Section */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                naariSayz
+                NaariSayz
               </h3>
               <p className="text-sm text-gray-400">
                 Empowering women through knowledge and support. Creating a safe space 

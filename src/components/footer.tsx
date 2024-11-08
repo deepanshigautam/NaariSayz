@@ -14,6 +14,7 @@ import {
   HeartHandshake,
   Code
 } from 'lucide-react';
+import SubscribeResource from '@/src/components/subscribeResource';
 
 const Footer = () => {
   return (
@@ -109,19 +110,9 @@ const Footer = () => {
               <p className="text-sm text-gray-400">
                 Stay updated with resources, support services, and community events.
               </p>
-              <form className="space-y-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
-                />
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition-opacity"
-                >
-                  Subscribe
-                </button>
-              </form>
+              
+                <SubscribeResource/>
+              
             </div>
           </div>
         </div>

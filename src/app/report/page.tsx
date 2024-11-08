@@ -92,7 +92,7 @@ const ReportPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from("report-incident").insert({
+      const { error: _error } = await supabase.from("report-incident").insert({
         incident_type: formData.incidentType,
         date_time: formData.dateTime,
         location: formData.location,
@@ -100,17 +100,18 @@ const ReportPage: React.FC = () => {
         email: formData.email,
         is_anonymous: formData.isAnonymous
       });
-
-      if (error) {
-        throw error;
+    
+      if (_error) {
+        throw _error;
       }
-
+    
       setShowConfirmation(true);
-    } catch (error) {
+    } catch  {
       setShowAlert(true);
     } finally {
       setIsSubmitting(false);
     }
+    
   };
 
   const ConfirmationScreen = () => (

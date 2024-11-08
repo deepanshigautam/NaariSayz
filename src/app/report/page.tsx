@@ -8,6 +8,7 @@ import { supabase } from "@/src/services/supabaseClient";
 
 // Define the type for formData
 interface FormData {
+  username:string,
   incidentType: string;
   dateTime: string;
   location: string;
@@ -20,6 +21,7 @@ const ReportPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [formData, setFormData] = useState<FormData>({
+    username:"",
     incidentType: "",
     dateTime: "",
     location: "",
@@ -93,6 +95,7 @@ const ReportPage: React.FC = () => {
 
     try {
       const { error: _error } = await supabase.from("report-incident").insert({
+        username: formData.username,
         incident_type: formData.incidentType,
         date_time: formData.dateTime,
         location: formData.location,
@@ -137,6 +140,7 @@ const ReportPage: React.FC = () => {
               onClick={() => {
                 setShowConfirmation(false);
                 setFormData({
+                  username:"",
                   incidentType: "",
                   dateTime: "",
                   location: "",
@@ -192,6 +196,19 @@ const ReportPage: React.FC = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur opacity-75" />
                   <div className="relative bg-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                     <div className="space-y-6">
+                    <div>
+                        <label className="block text-gray-300 mb-2">Name *</label>
+                        <input
+                          type="text"
+                          name="username"
+                          value={formData.username}
+                          onChange={handleChange}
+                          className={`w-full bg-black/50 border ${errors.username ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors`}
+                        />
+                        {errors.username && (
+                          <p className="text-red-400 text-sm mt-1">{errors.username}</p>
+                        )}
+                      </div>
                       <div>
                         <label className="block text-gray-300 mb-2">Incident Type *</label>
                         <select
@@ -239,6 +256,7 @@ const ReportPage: React.FC = () => {
                           <p className="text-red-400 text-sm mt-1">{errors.location}</p>
                         )}
                       </div>
+                      
 
                       <div>
                         <label className="block text-gray-300 mb-2">Description *</label>

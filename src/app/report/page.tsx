@@ -286,7 +286,7 @@ const ReportPage: React.FC = () => {
                         )}
                       </div>
 
-                      <div className="flex items-center">
+                      {/* <div className="flex items-center">
                         <input
                           type="checkbox"
                           name="isAnonymous"
@@ -295,7 +295,7 @@ const ReportPage: React.FC = () => {
                           className="form-checkbox h-5 w-5 text-purple-500 border-gray-300 rounded focus:ring-purple-400 focus:ring-offset-black"
                         />
                         <label className="ml-2 text-gray-300">Submit as anonymous</label>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -84,9 +84,9 @@ const Footer = () => {
               <h4 className="text-lg font-semibold text-white">Reach Out</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="tel:1800-XXX-XXXX" className="text-sm hover:text-purple-500 transition-colors flex items-center gap-2">
+                  <a href="tel:(011) 26853846/ 26524061" className="text-sm hover:text-purple-500 transition-colors flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    Helpline: 1800-XXX-XXXX
+                    Helpline: (011) 26853846/ 26524061
                   </a>
                 </li>
                 <li>
